@@ -7,7 +7,9 @@ const port = process.env.HTTPPORT || 80,
         'totalHits': 0
       }
 
-function countHit( req ) {
+function countHit( resolve, reject, data ) {
+  const req = data.req
+
   req
     .question
     .forEach(
@@ -21,10 +23,13 @@ function countHit( req ) {
         stats.clients[ req.address.address ][ question.name ].hit++
       }
     )
+
+  resolve()
 }
 
-function start( entries ) {
-  const server = restify.createServer()
+function start( resolve, reject, data ) {
+  const server = restify.createServer(),
+        entries = data.entries
 
   server
     .get(
@@ -56,17 +61,20 @@ function start( entries ) {
     )
 
   server
-    .on( 'error', e => console.log( `>> HTTP: ERROR: ${e.message}` ) )
-    .listen( port, () => console.log( `>> HTTP: Server listening on ${server.url}` ) )
+    .on( 'error', e => reject( `>> HTTP: ERROR: ${e.message}` ) )
+    .listen( port, () => {
+      console.log( `>> HTTP: Server listening on ${server.url}` )
+      resolve()
+    })
 }
 
 export default class {
   constructor( dns ) {
     dns
-      .on( 'init', ( entries ) => {
-        start( entries )
+      .on( 'init', ( resolve, reject, data ) => {
+        start( resolve, reject, data )
       })
-      .on( 'resolve.internal', ( req ) => countHit( req ) )
-      .on( 'resolve.external', ( req ) => countHit( req ) )
+      .on( 'resolve.internal', ( resolve, reject, data ) => countHit( resolve, reject, data ) )
+      .on( 'resolve.external', ( resolve, reject, data ) => countHit( resolve, reject, data ) )
   }
 }

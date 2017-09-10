@@ -1,0 +1,30 @@
+{
+  "name": "dynsdjs-plugin-api",
+  "version": "0.0.1",
+  "description": "Dynsd API Plugin",
+  "author": "Julian Xhokaxhiu",
+  "license": "MIT",
+  "homepage": "https://github.com/julianxhokaxhiu/dynsdjs-plugin-api#readme",
+  "bugs": {
+    "url": "https://github.com/julianxhokaxhiu/dynsdjs-plugin-api/issues"
+  },
+  "main": "dist/DynsdAPI.js",
+  "scripts": {
+    "build:dev": "webpack",
+    "build:watch": "webpack --watch",
+    "prepublish": "webpack --env=prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianxhokaxhiu/dynsdjs-plugin-api.git"
+  },
+  "keywords": [
+    "dynsd"
+  ],
+  "devDependencies": {
+    "babili-webpack-plugin": "^0.1.2",
+    "node-fetch": "^1.7.2",
+    "restify": "^5.2.0",
+    "webpack": "^3.3.0"
+  }
+}

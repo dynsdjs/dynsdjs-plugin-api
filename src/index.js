@@ -7,14 +7,20 @@ const port = process.env.HTTPPORT || 80,
         'totalHits': 0
       }
 
-function countHit( currentQuestion, req ) {
-  if ( !( req.address.address in stats.clients ) )
-    stats.clients[ req.address.address ] = {}
+function countHit( req ) {
+  req
+    .question
+    .forEach(
+      ( question ) => {
+        if ( !( req.address.address in stats.clients ) )
+          stats.clients[ req.address.address ] = {}
 
-  if ( !( currentQuestion.name in stats.clients[ req.address.address ] ) )
-    stats.clients[ req.address.address ][ currentQuestion.name ] = { hit: 0 }
+        if ( !( question.name in stats.clients[ req.address.address ] ) )
+          stats.clients[ req.address.address ][ question.name ] = { hit: 0 }
 
-  stats.clients[ req.address.address ][ currentQuestion.name ].hit++
+        stats.clients[ req.address.address ][ question.name ].hit++
+      }
+    )
 }
 
 function start( entries ) {
@@ -60,7 +66,7 @@ export default class {
       .on( 'init', ( entries ) => {
         start( entries )
       })
-      .on( 'resolve.internal', ( currentQuestion, req ) => countHit( currentQuestion, req ) )
-      .on( 'resolve.external', ( currentQuestion, req ) => countHit( currentQuestion, req ) )
+      .on( 'resolve.internal', ( req ) => countHit( req ) )
+      .on( 'resolve.external', ( req ) => countHit( req ) )
   }
 }

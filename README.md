@@ -9,15 +9,19 @@ Just install the package via npm on the dynsdjs project directory
 $ npm install dynsdjs-plugin-api
 ```
 
+## Options
+
+You can configure this plugin through Environment variables
+
+- `HTTPPORT` for the HTTP service ( default is `80` )
+
 ## Usage
 
-The plugin exposes an HTTP `8080` port where you can access the following endpoints:
+The plugin exposes an HTTP port where you can access the following endpoints:
 
 - `/api` it will provide a minimal statistic about which client accessed which domain, as well as a total hit count and how many entires are present in the DNS server
 
 ### Example
-
-Just visit http://localhost:8080/api
 
 An example output:
 

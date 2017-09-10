@@ -7,7 +7,7 @@ const port = process.env.HTTPPORT || 80,
         'totalHits': 0
       }
 
-function countHit( currentQuestion, req, res ) {
+function countHit( currentQuestion, req ) {
   if ( !( req.address.address in stats.clients ) )
     stats.clients[ req.address.address ] = {}
 
@@ -60,7 +60,7 @@ export default class {
       .on( 'init', ( entries ) => {
         start( entries )
       })
-      .on( 'resolve.internal', ( currentQuestion, req, res ) => countHit( currentQuestion, req, res ) )
-      .on( 'resolve.external', ( currentQuestion, req, res ) => countHit( currentQuestion, req, res ) )
+      .on( 'resolve.internal', ( currentQuestion, req ) => countHit( currentQuestion, req ) )
+      .on( 'resolve.external', ( currentQuestion, req ) => countHit( currentQuestion, req ) )
   }
 }

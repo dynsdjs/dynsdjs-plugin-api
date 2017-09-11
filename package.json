@@ -4,9 +4,9 @@
   "description": "Dynsd API Plugin",
   "author": "Julian Xhokaxhiu",
   "license": "MIT",
-  "homepage": "https://github.com/julianxhokaxhiu/dynsdjs-plugin-api#readme",
+  "homepage": "https://github.com/dynsdjs/dynsdjs-plugin-api#readme",
   "bugs": {
-    "url": "https://github.com/julianxhokaxhiu/dynsdjs-plugin-api/issues"
+    "url": "https://github.com/dynsdjs/dynsdjs-plugin-api/issues"
   },
   "main": "dist/DynsdAPI.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/julianxhokaxhiu/dynsdjs-plugin-api.git"
+    "url": "git+https://github.com/dynsdjs/dynsdjs-plugin-api.git"
   },
   "keywords": [
     "dynsd"

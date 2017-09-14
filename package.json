@@ -23,7 +23,6 @@
   ],
   "devDependencies": {
     "babili-webpack-plugin": "^0.1.2",
-    "node-fetch": "^1.7.2",
     "restify": "^5.2.0",
     "webpack": "^3.3.0"
   }

@@ -3,10 +3,10 @@ REST API Plugin
 
 ## Installation
 
-Just install the package via npm on the dynsdjs project directory
+Just install the package via npm by doing
 
 ```shell
-$ npm install dynsdjs-plugin-api
+$ npm install -g dynsdjs-plugin-api
 ```
 
 ## Options

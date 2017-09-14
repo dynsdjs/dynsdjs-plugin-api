@@ -61,9 +61,9 @@ function start( resolve, reject, data ) {
     )
 
   server
-    .on( 'error', e => reject( `>> HTTP: ERROR: ${e.message}` ) )
+    .on( 'error', e => reject( `[API] ERROR: ${e.message}` ) )
     .listen( port, () => {
-      console.log( `>> HTTP: Server listening on ${server.url}` )
+      console.log( `[API] HTTP Server listening on ${server.url}` )
       resolve()
     })
 }

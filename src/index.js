@@ -1,3 +1,4 @@
+import os from 'os'
 import restify from 'restify'
 
 const port = process.env.HTTPPORT || 80,
@@ -66,7 +67,8 @@ function start( resolve, reject, data ) {
   server
     .on( 'error', e => reject( `[${chalk.blue('API')}] ${e.message}` ) )
     .listen( port, () => {
-      console.log( `[${chalk.blue('API')}] HTTP Server listening on ${chalk.blue(server.url)}` )
+      const url = `http://${os.hostname()}:${port}/api`
+      console.log( `[${chalk.blue('API')}] HTTP Server listening on ${chalk.blue(url)}` )
       resolve()
     })
 }
@@ -77,6 +79,7 @@ export default class {
 
     dns
       .on( 'init', ( resolve, reject, data ) => {
+        console.log( `[${chalk.blue('API')}] Starting the HTTP server...` )
         start( resolve, reject, data )
       })
       .on( 'resolve.internal', ( resolve, reject, data ) => countHit( resolve, reject, data ) )

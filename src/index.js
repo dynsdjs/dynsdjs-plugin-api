@@ -7,6 +7,9 @@ const port = process.env.HTTPPORT || 80,
         'totalHits': 0
       }
 
+// We will use this to store a reference to the dynsd chalk instance
+let chalk = null
+
 function countHit( resolve, reject, data ) {
   const req = data.req
 
@@ -61,15 +64,17 @@ function start( resolve, reject, data ) {
     )
 
   server
-    .on( 'error', e => reject( `[API] ERROR: ${e.message}` ) )
+    .on( 'error', e => reject( `[${chalk.blue('API')}] ${e.message}` ) )
     .listen( port, () => {
-      console.log( `[API] HTTP Server listening on ${server.url}` )
+      console.log( `[${chalk.blue('API')}] HTTP Server listening on ${chalk.blue(server.url)}` )
       resolve()
     })
 }
 
 export default class {
   constructor( dns ) {
+    chalk = dns.chalk
+
     dns
       .on( 'init', ( resolve, reject, data ) => {
         start( resolve, reject, data )

@@ -1,7 +1,7 @@
 import os from 'os'
 import restify from 'restify'
 
-const port = process.env.HTTPPORT || 80,
+const port = process.env.DYNSD_API_HTTPPORT || 80,
       stats = {
         'clients': {},
         'internalEntries': 0,

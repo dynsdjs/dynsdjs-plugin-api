@@ -13,7 +13,7 @@ $ npm install -g dynsdjs-plugin-api
 
 You can configure this plugin through Environment variables
 
-- `HTTPPORT` for the HTTP service ( default is `80` )
+- `DYNSD_API_HTTPPORT` for the HTTP service ( default is `80` )
 
 ## Usage
 

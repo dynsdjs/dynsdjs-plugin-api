@@ -65,7 +65,7 @@ function start( resolve, reject, data ) {
     )
 
   server
-    .on( 'error', e => reject( `[${chalk.blue('API')}] ${e.message}` ) )
+    .on( 'restifyError', e => reject( `[${chalk.blue('API')}] ${e.message}` ) )
     .listen( port, () => {
       const url = `http://${os.hostname()}:${port}/api`
       console.log( `[${chalk.blue('API')}] HTTP Server listening on ${chalk.blue(url)}` )

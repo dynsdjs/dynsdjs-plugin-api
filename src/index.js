@@ -39,35 +39,30 @@ function start( resolve, reject, data ) {
     .get(
       '/api',
       ( req, res, next ) => {
-        entries.keys(
-          ( err, keys ) => {
-            // Set it globally
-            stats.internalEntries = keys.length
+        stats.internalEntries = entries.keys().length
 
-            // Start the local response logic
-            let ret = Object.assign( {}, stats )
+        // Start the local response logic
+        let ret = Object.assign( {}, stats )
 
-            Object.keys( stats.clients)
-              .forEach(
-                ( client ) => {
-                  Object.keys( stats.clients[ client ] )
-                    .forEach(
-                      domain => ret.totalHits += stats.clients[ client ][ domain ].hit
-                    )
-                }
-              )
+        Object.keys( stats.clients)
+          .forEach(
+            ( client ) => {
+              Object.keys( stats.clients[ client ] )
+                .forEach(
+                  domain => ret.totalHits += stats.clients[ client ][ domain ].hit
+                )
+            }
+          )
 
-            res.send( ret )
-            next()
-          }
-        )
+        res.send( ret )
+        next()
       }
     )
 
   server
-    .on( 'restifyError', e => reject( `[${chalk.blue('API')}] ${e.message}` ) )
+    .on( 'restifyError', (req, res, err, cb) => { reject( `[${chalk.blue('API')}] ${err}` ); cb() } )
     .listen( port, () => {
-      const url = `http://${os.hostname()}:${port}/api`
+      const url = `http://localhost:${port}/api`
       console.log( `[${chalk.blue('API')}] HTTP Server listening on ${chalk.blue(url)}` )
       resolve()
     })
